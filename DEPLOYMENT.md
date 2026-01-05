@@ -1,21 +1,28 @@
 # Deployment Guide
 
-## Deploy to Cloudflare Pages
+## 🚀 Deploy to Cloudflare Pages (RECOMMENDED)
 
-Since we can't deploy directly from this environment due to proxy restrictions, here's how you can deploy manually:
+**Full Setup Guide:** See [CLOUDFLARE_SETUP.md](./CLOUDFLARE_SETUP.md) for complete step-by-step instructions.
 
-### Option 1: Deploy via Cloudflare Dashboard (Easiest)
+### Quick Start - Connect GitHub to Cloudflare
 
 1. Go to https://dash.cloudflare.com/
-2. Navigate to **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**
-3. Connect your GitHub account and select the `Annanerdstation/game-claude` repository
+2. Navigate to **Workers & Pages** → **Create application** → **Pages** → **Connect to Git**
+3. Authorize GitHub and select the `Annanerdstation/game-claude` repository
 4. Configure build settings:
-   - **Production branch**: `claude/add-button-confetti-1sCPz` (or main after merging)
+   - **Project name**: `game-claude-confetti`
+   - **Production branch**: `claude/add-button-confetti-1sCPz`
    - **Build command**: (leave empty - no build needed)
    - **Build output directory**: `/` (root directory)
 5. Click **Save and Deploy**
 
-Your site will be live at: `https://game-claude-confetti.pages.dev` (or similar)
+Your site will be live at: `https://game-claude-confetti.pages.dev`
+
+**Benefits:**
+- ✅ Automatic deployments on every push
+- ✅ Preview URLs for every commit
+- ✅ Global CDN with free HTTPS
+- ✅ Unlimited bandwidth
 
 ### Option 2: Deploy via Wrangler CLI (From your local machine)
 
