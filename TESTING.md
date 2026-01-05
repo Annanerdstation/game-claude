@@ -1,8 +1,31 @@
 # Testing Environment
 
-## Local Testing Server
+## 🌐 PUBLIC Testing Environment (RECOMMENDED)
 
-Your confetti button is now running on a local testing server!
+### Quick Setup - GitHub Pages (1 minute)
+
+Since you need a publicly accessible testing environment, follow these simple steps:
+
+1. **Go to your repository settings:**
+   - Visit: https://github.com/Annanerdstation/game-claude/settings/pages
+
+2. **Enable GitHub Pages:**
+   - Under "Source", select branch: `claude/add-button-confetti-1sCPz`
+   - Set folder to: `/ (root)`
+   - Click "Save"
+
+3. **Access your testing site:**
+   - Your site will be live at: **https://annanerdstation.github.io/game-claude/**
+   - (It may take 1-2 minutes to build and deploy)
+
+4. **Test the confetti:**
+   - Click the "🎉 Celebrate! 🎉" button and enjoy!
+
+---
+
+## 💻 Local Testing Server (For Development Only)
+
+**Note:** This only works if you're running on the same machine as the server.
 
 ### Access the Application
 
