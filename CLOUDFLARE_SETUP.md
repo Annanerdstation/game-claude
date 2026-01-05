@@ -32,18 +32,22 @@ Follow these steps to set up automatic deployments from GitHub to Cloudflare Pag
 
 ### Step 5: Configure Build Settings
 
-Use these exact settings:
+⚠️ **IMPORTANT:** Use these exact settings to avoid deployment errors:
 
 **Project name:** `game-claude-confetti` (or your preferred name)
 
 **Production branch:** `claude/add-button-confetti-1sCPz`
 
 **Build settings:**
-- **Framework preset:** None
-- **Build command:** (leave empty)
-- **Build output directory:** `/` (root)
+- **Framework preset:** `None` (do not select any framework)
+- **Build command:** **LEAVE COMPLETELY EMPTY** (do not type anything, not even a space)
+- **Build output directory:** `.` (just a single dot) or `/` (root)
+
+**Root directory (optional):** Leave empty
 
 **Environment variables:** (none needed)
+
+> 💡 **Tip:** This is a static site with no build process. Cloudflare should serve the HTML/CSS/JS files directly without running any build commands.
 
 ### Step 6: Deploy!
 
@@ -126,16 +130,31 @@ View your deployments:
 
 ## Troubleshooting
 
+**Issue:** `[ERROR] Missing entry-point to Worker script or to assets directory`
+- **Solution:** This means Cloudflare is treating your project as a Worker instead of a static Pages site.
+- **Fix:**
+  1. Go to your Cloudflare dashboard
+  2. Delete the current deployment (if created as Worker)
+  3. Create a NEW project selecting **Pages** (not Workers)
+  4. Make sure you select **Connect to Git** under the Pages tab
+  5. Ensure build command is **completely empty** (not even `wrangler deploy`)
+  6. Set build output directory to `/` or `.`
+  7. The project now includes `wrangler.toml` and `.pages.toml` config files that fix this
+
 **Issue:** GitHub authorization fails
 - **Solution:** Check that you've granted Cloudflare access to your repository
 
-**Issue:** Build fails
-- **Solution:** Make sure build command is empty and build directory is `/`
+**Issue:** Build fails with npm/build commands
+- **Solution:** Make sure build command is **completely empty** - leave it blank, don't add any commands
+- For static sites like this, Cloudflare should just serve the files directly
 
 **Issue:** 404 errors
 - **Solution:** Verify that `index.html` is in the root directory
 
 **Issue:** Changes not deploying
 - **Solution:** Check that you selected the correct production branch
+
+**Issue:** Build output directory error
+- **Solution:** Try setting it to `.` (current directory) instead of `/`
 
 Need help? Check the Cloudflare Pages documentation or contact support!
