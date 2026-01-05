@@ -32,7 +32,7 @@ Follow these steps to set up automatic deployments from GitHub to Cloudflare Pag
 
 ### Step 5: Configure Build Settings
 
-⚠️ **IMPORTANT:** Use these exact settings to avoid deployment errors:
+⚠️ **CRITICAL:** Use these exact settings to avoid deployment errors:
 
 **Project name:** `game-claude-confetti` (or your preferred name)
 
@@ -40,14 +40,20 @@ Follow these steps to set up automatic deployments from GitHub to Cloudflare Pag
 
 **Build settings:**
 - **Framework preset:** `None` (do not select any framework)
-- **Build command:** **LEAVE COMPLETELY EMPTY** (do not type anything, not even a space)
-- **Build output directory:** `.` (just a single dot) or `/` (root)
+- **Build command:** **LEAVE COMPLETELY EMPTY**
+  - ❌ Do NOT type `wrangler deploy`
+  - ❌ Do NOT type `npx wrangler versions upload`
+  - ❌ Do NOT type anything at all - leave it blank!
+- **Build output directory:** `/` (root directory)
+  - ⚠️ Do NOT use `.` - use `/` instead
 
 **Root directory (optional):** Leave empty
 
 **Environment variables:** (none needed)
 
 > 💡 **Tip:** This is a static site with no build process. Cloudflare should serve the HTML/CSS/JS files directly without running any build commands.
+
+> ⚠️ **Common Mistake:** Cloudflare might auto-fill a build command. Make sure to DELETE it completely!
 
 ### Step 6: Deploy!
 
@@ -130,6 +136,18 @@ View your deployments:
 
 ## Troubleshooting
 
+**Issue:** `[ERROR] The entry-point file at "workers-site/index.js" was not found` OR `Executing user deploy command: npx wrangler versions upload`
+- **Cause:** Cloudflare has a build/deploy command configured when it should be empty
+- **Fix:**
+  1. Go to your Cloudflare dashboard: https://dash.cloudflare.com/
+  2. Navigate to **Workers & Pages** → Your project
+  3. Click **Settings** → **Builds & deployments**
+  4. Click **Edit configuration**
+  5. Find **Build command** field and DELETE everything - make it completely empty
+  6. Set **Build output directory** to `/` (just a forward slash)
+  7. Click **Save**
+  8. Go to **Deployments** tab and click **Retry deployment**
+
 **Issue:** `[ERROR] Missing entry-point to Worker script or to assets directory`
 - **Solution:** This means Cloudflare is treating your project as a Worker instead of a static Pages site.
 - **Fix:**
@@ -138,8 +156,7 @@ View your deployments:
   3. Create a NEW project selecting **Pages** (not Workers)
   4. Make sure you select **Connect to Git** under the Pages tab
   5. Ensure build command is **completely empty** (not even `wrangler deploy`)
-  6. Set build output directory to `/` or `.`
-  7. The project now includes `wrangler.toml` and `.pages.toml` config files that fix this
+  6. Set build output directory to `/`
 
 **Issue:** GitHub authorization fails
 - **Solution:** Check that you've granted Cloudflare access to your repository

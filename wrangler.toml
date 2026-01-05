@@ -1,7 +1,0 @@
-name = "game-claude-confetti"
-pages_build_output_dir = "."
-
-[site]
-bucket = "."
-
-compatibility_date = "2024-01-01"
